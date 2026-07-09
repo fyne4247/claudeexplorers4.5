@@ -47,25 +47,32 @@ copy /Y .claude\settings.json "%USERPROFILE%\.claude\settings.json" >nul 2>nul
 echo + Configuration copied to %USERPROFILE%\.claude\
 echo.
 
-REM Check for API key
-claude config get apiKey >nul 2>nul
+REM Check sign-in status
+claude auth status --text > "%TEMP%\claude_auth_check.txt" 2>nul
+findstr /C:"Login method" "%TEMP%\claude_auth_check.txt" >nul
 if %ERRORLEVEL% EQU 0 (
-    echo + API key is already configured
+    echo + Already signed in:
+    type "%TEMP%\claude_auth_check.txt"
 ) else (
-    echo API Key Setup
-    echo You need an Anthropic API key to use Claude.
-    echo Get one at: https://console.anthropic.com/
+    echo Sign In
+    echo Claude Code needs you to sign in before you can chat. Two ways to do this:
     echo.
-    set /p api_key="Enter your API key (or press Enter to skip): "
+    echo   1) Log in with your Claude.ai account (Pro, Max, Team, or Enterprise plan^)
+    echo   2) Use an Anthropic Console API key (pay-as-you-go billing^)
+    echo.
+    echo Note: Claude.ai FREE accounts can't sign in to Claude Code - you need a paid
+    echo Pro/Max/Team/Enterprise plan. If you don't have one, pick option 2 instead.
+    echo.
+    set /p login_choice="Choose 1 or 2 [1]: "
+    echo.
 
-    if not "%api_key%"=="" (
-        claude config set apiKey "%api_key%"
-        echo + API key configured
+    if "%login_choice%"=="2" (
+        claude auth login --console
     ) else (
-        echo Skipped API key setup. You can set it later with:
-        echo    claude config set apiKey YOUR_KEY_HERE
+        claude auth login --claudeai
     )
 )
+del "%TEMP%\claude_auth_check.txt" >nul 2>nul
 
 echo.
 echo ========================================

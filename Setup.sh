@@ -50,22 +50,28 @@ mkdir -p ~/.claude/memory
 echo "✅ Configuration copied to ~/.claude/"
 echo ""
 
-# Check for API key
-if claude config get apiKey &> /dev/null; then
-    echo "✅ API key is already configured"
+# Check sign-in status
+auth_output=$(claude auth status --text 2>&1)
+if echo "$auth_output" | grep -q "Login method"; then
+    echo "✅ Already signed in:"
+    echo "$auth_output"
 else
-    echo "🔑 API Key Setup"
-    echo "You need an Anthropic API key to use Claude."
-    echo "Get one at: https://console.anthropic.com/"
+    echo "🔑 Sign In"
+    echo "Claude Code needs you to sign in before you can chat. Two ways to do this:"
     echo ""
-    read -p "Enter your API key (or press Enter to skip): " api_key
+    echo "  1) Log in with your Claude.ai account (Pro, Max, Team, or Enterprise plan)"
+    echo "  2) Use an Anthropic Console API key (pay-as-you-go billing)"
+    echo ""
+    echo "Note: Claude.ai FREE accounts can't sign in to Claude Code — you need a paid"
+    echo "Pro/Max/Team/Enterprise plan. If you don't have one, pick option 2 instead."
+    echo ""
+    read -p "Choose 1 or 2 [1]: " login_choice
+    echo ""
 
-    if [ ! -z "$api_key" ]; then
-        claude config set apiKey "$api_key"
-        echo "✅ API key configured"
+    if [ "$login_choice" = "2" ]; then
+        claude auth login --console
     else
-        echo "⏭️  Skipped API key setup. You can set it later with:"
-        echo "   claude config set apiKey YOUR_KEY_HERE"
+        claude auth login --claudeai
     fi
 fi
 

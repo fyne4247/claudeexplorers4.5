@@ -49,17 +49,19 @@ Just double-click `Setup.command`
 1. Installs the Claude Code CLI globally
 2. Copies conversation-optimized settings to your home directory
 3. Sets up the memory system
-4. Prompts for your Anthropic API key (if you don't have one)
+4. Asks you to sign in (see below)
 
-## Getting an API Key
+## Signing In
 
-1. Go to [console.anthropic.com](https://console.anthropic.com/)
-2. Sign up or log in
-3. Go to "API Keys" 
-4. Create a new key
-5. Copy it and paste when the setup asks for it
+The setup wizard will ask you to choose one of two ways to sign in:
 
-**Note:** The API is pay-as-you-go, but Sonnet 4.5 is very affordable (much cheaper than Opus). You get $5 free credit to start.
+1. **Log in with your Claude.ai account** — if you already have a **Pro, Max, Team, or Enterprise** subscription, this is the easiest option. No API key needed; the wizard opens a browser login for you.
+   - ⚠️ **Free Claude.ai accounts can't sign in to Claude Code** — you need one of the paid plans above.
+2. **Use an Anthropic Console API key** — pay-as-you-go billing, works even without a subscription.
+   - Get one at [console.anthropic.com](https://console.anthropic.com/) (go to "API Keys" → create a new key)
+   - The wizard walks you through linking it. Sonnet 4.5 is very affordable this way (much cheaper than Opus), and you get $5 free credit to start.
+
+You can re-run sign-in anytime with `claude auth login`, and check your status with `claude auth status`.
 
 ## How to Chat
 
@@ -124,8 +126,9 @@ Check out `examples/` for sample conversations showing what chatting with Claude
 - The CLI might not be in your PATH. Try: `npx @anthropic-ai/claude-code` instead
 - Or add npm global bin to your PATH
 
-**"API key not set"**  
-- Run: `claude config set apiKey YOUR_KEY_HERE`
+**"Not signed in" / auth errors**
+- Run: `claude auth login` (add `--claudeai` for a subscription or `--console` for an API key)
+- Check current status with: `claude auth status`
 
 **Memory not working**
 - Make sure you're running from the claudeexplorers4.5 directory, or

@@ -1,0 +1,13 @@
+# User-specific memory files
+.claude/memory/*.md
+
+# Keep the directory structure but not personal memories
+!.claude/memory/.gitkeep
+
+# System files
+.DS_Store
+*.log
+
+# Don't commit API keys (just in case)
+.env
+.claude/apikey

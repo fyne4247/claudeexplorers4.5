@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read:.claude/memory/**",
+      "Write:.claude/memory/**",
+      "Edit:.claude/memory/**",
+      "Bash:ls .claude/memory/**",
+      "Bash:cat .claude/memory/**"
+    ]
+  }
+}

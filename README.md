@@ -66,7 +66,7 @@ Just double-click `Setup.command`
 After setup, just run:
 
 ```bash
-claude
+claude --model claude-sonnet-4-5
 ```
 
 Or use the launcher scripts:

@@ -1,5 +1,19 @@
 # Getting Started
 
+## First Time Chatting
+
+Once you've run the setup below, there's a couple different commands you can use to customize your chat experience:
+
+1. /myname [name] - Set your name
+2. /claudename [name] - Give Claude a custom name
+3. /gtkuser - Personality quiz to learn about the user
+4. /gtkclaude - Learn about Claude's capabilities
+5. /vibe-align - Permanent personality customization (edits CLAUDE.md)
+6. /vibe-check [mode] - Temporary tone adjustment for this chat
+7. /memory-recap - Review saved memories
+
+These settings will be remembered across all future chats!
+
 ## macOS
 
 1. Open Terminal.
@@ -8,9 +22,7 @@
 
 3. Copy and paste into terminal:
 
-   ```bash
    sudo xattr -d -r com.apple.quarantine . && sudo chmod +x Setup.command chat.command
-   ```
 
 4. Terminal will ask for your root/admin password. Type it in and hit enter.
 
@@ -21,7 +33,7 @@
 
 5. Double-click the setup wizard (`Setup.command`) and follow it through.
 
-6. Done! From here on out, you should only ever need to run `chat.command` (or just type `claude` in terminal).
+6. Done! From here on out, you should only ever need to run `chat.command` (or just type `claude --model claude-sonnet-4-5` in terminal).
 
 ## Windows
 
@@ -29,7 +41,7 @@
 2. Double-click `Setup.bat`.
 3. If a blue "Windows protected your PC" box pops up, click **More info** then **Run anyway**. (Just SmartScreen being cautious about an unsigned script — nothing wrong with the file.)
 4. Follow the setup wizard through.
-5. Done! From here on out, you should only ever need to run `chat.bat` (or just type `claude` in command prompt).
+5. Done! From here on out, you should only ever need to run `chat.bat` (or just type `claude --model claude-sonnet-4-5` in command prompt).
 
 ## Linux
 
@@ -37,24 +49,10 @@
 
 2. Copy and paste into terminal:
 
-   ```bash
    chmod +x Setup.sh chat.sh && ./Setup.sh
-   ```
 
    - `chmod` makes the two `.sh` files runnable.
 
 3. Follow the setup wizard through.
 
-4. Done! From here on out, you should only ever need to run `./chat.sh` (or just type `claude` in terminal).
-
----
-
-## First Time Chatting
-
-Once you've run the setup, start your first chat and try these commands to personalize your experience:
-
-- `/myname [your name]` - Tell Claude your name
-- `/gtkuser` - Answer a few questions so Claude learns about you
-- `/vibe-align` - Customize Claude's personality to match your preferences
-
-These settings will be remembered across all future chats!
+4. Done! From here on out, you should only ever need to run `./chat.sh` (or just type `claude --model claude-sonnet-4-5` in terminal).
